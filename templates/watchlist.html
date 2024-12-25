@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Watchlist</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="watchlist-container">
+        <h2>Your Movie Watchlist</h2>
+
+        <!-- Form to Add New Movie -->
+        <form method="POST" action="{{ url_for('watchlist') }}">
+            <label for="title">Movie Title:</label>
+            <input type="text" name="title" id="title" required>
+            <button type="submit">Add Movie</button>
+        </form>
+
+        <!-- Movie List -->
+        <ul>
+            {% for movie in movies %}
+            <li style="text-decoration: {% if movie.watched %}line-through{% else %}none{% endif %};">
+                {{ movie.title }}
+
+                <!-- Mark as Watched Button -->
+                {% if not movie.watched %}
+                    <a href="{{ url_for('watched_movie', movie_id=movie.id) }}">
+                        <button>Mark as Watched</button>
+                    </a>
+                {% endif %}
+
+                <!-- Delete Movie Button -->
+                <a href="{{ url_for('delete_movie', movie_id=movie.id) }}">
+                    <button>Delete</button>
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+
+        <!-- Back to Home -->
+        <a href="/">Go back to Home</a>
+    </div>
+</body>
+</html>

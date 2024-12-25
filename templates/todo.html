@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="todo-container">
+        <h2>Your To-Do List</h2>
+
+        <!-- Form to Add New Task -->
+        <form method="POST" action="{{ url_for('todo') }}">
+            <label for="description">Task Description:</label>
+            <input type="text" name="description" id="description" required>
+            <button type="submit">Add Task</button>
+        </form>
+
+        <!-- Task List -->
+        <ul>
+            {% for task in tasks %}
+            <li style="text-decoration: {% if task.completed %}line-through{% else %}none{% endif %};">
+                {{ task.description }}
+
+                <!-- Complete Task Button -->
+                {% if not task.completed %}
+                    <a href="{{ url_for('complete_task', task_id=task.id) }}">
+                        <button>Complete</button>
+                    </a>
+                {% endif %}
+
+                <!-- Delete Task Button -->
+                <a href="{{ url_for('delete_task', task_id=task.id) }}">
+                    <button>Delete</button>
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+
+        <!-- Back to Home -->
+        <a href="/">Go back to Home</a>
+    </div>
+</body>
+</html>

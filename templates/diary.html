@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diary</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="diary-container">
+        <h2>Your Diary</h2>
+        <form method="POST">
+            <label for="name">Your Name:</label>
+            <input type="text" name="name" required><br><br>
+            <label for="content">Diary Entry:</label><br>
+            <textarea name="content" rows="4" required></textarea><br><br>
+            <button type="submit">Add Entry</button>
+        </form>
+        <h3>Past Entries</h3>
+        <ul>
+            {% for entry in entries %}
+                <li>{{ entry.name }}: {{ entry.content }} ({{ entry.date }})</li>
+            {% endfor %}
+        </ul>
+        <a href="/">Go back to Home</a>
+    </div>
+</body>
+</html>

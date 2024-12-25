@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome {{ user }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="main-container">
+        <h2>Welcome, {{ user }}!</h2>
+        <p>What would you like to do?</p>
+        <a href="/todo"><button>Go to To-Do List</button></a>
+        <a href="/diary"><button>Go to Diary</button></a>
+        <a href="/watchlist"><button>Go to  Movie Watchlist</button></a>
+    </div>
+</body>
+</html>
