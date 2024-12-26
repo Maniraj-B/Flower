@@ -129,6 +129,4 @@ def logout():
 
 # Add app context for db creation
 if __name__ == '__main__':
-    with app.app_context():  # This ensures the app context is available
-        db.create_all()  # Creates the database tables if they don't exist
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=5000)
